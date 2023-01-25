@@ -53,6 +53,10 @@ public class StickerContentProvider extends ContentProvider {
     public static final String STICKER_FILE_NAME_IN_QUERY = "sticker_file_name";
     public static final String STICKER_FILE_EMOJI_IN_QUERY = "sticker_emoji";
     private static final String CONTENT_FILE_NAME = "contents.json";
+    // lorenz-edit
+    public static final String TELEGRAM_LINK = "sticker_pack_telegram_link";
+    public static final String SIGNAL_LINK = "sticker_pack_signal_link";
+
 
     public static final Uri AUTHORITY_URI = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT).authority(BuildConfig.CONTENT_PROVIDER_AUTHORITY).appendPath(StickerContentProvider.METADATA).build();
 
@@ -193,6 +197,8 @@ public class StickerContentProvider extends ContentProvider {
                         IMAGE_DATA_VERSION,
                         AVOID_CACHE,
                         ANIMATED_STICKER_PACK,
+                        TELEGRAM_LINK,
+                        SIGNAL_LINK
                 });
         for (StickerPack stickerPack : stickerPackList) {
             MatrixCursor.RowBuilder builder = cursor.newRow();
@@ -209,6 +215,8 @@ public class StickerContentProvider extends ContentProvider {
             builder.add(stickerPack.imageDataVersion);
             builder.add(stickerPack.avoidCache ? 1 : 0);
             builder.add(stickerPack.animatedStickerPack ? 1 : 0);
+            builder.add(stickerPack.telegramLink);
+            builder.add(stickerPack.signalLink);
         }
         cursor.setNotificationUri(Objects.requireNonNull(getContext()).getContentResolver(), uri);
         return cursor;

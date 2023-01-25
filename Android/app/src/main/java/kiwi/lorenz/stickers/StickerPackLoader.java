@@ -39,6 +39,9 @@ import static kiwi.lorenz.stickers.StickerContentProvider.STICKER_PACK_ICON_IN_Q
 import static kiwi.lorenz.stickers.StickerContentProvider.STICKER_PACK_IDENTIFIER_IN_QUERY;
 import static kiwi.lorenz.stickers.StickerContentProvider.STICKER_PACK_NAME_IN_QUERY;
 import static kiwi.lorenz.stickers.StickerContentProvider.STICKER_PACK_PUBLISHER_IN_QUERY;
+import static kiwi.lorenz.stickers.StickerContentProvider.TELEGRAM_LINK;
+import static kiwi.lorenz.stickers.StickerContentProvider.SIGNAL_LINK;
+
 
 class StickerPackLoader {
 
@@ -108,7 +111,9 @@ class StickerPackLoader {
             final String imageDataVersion = cursor.getString(cursor.getColumnIndexOrThrow(IMAGE_DATA_VERSION));
             final boolean avoidCache = cursor.getShort(cursor.getColumnIndexOrThrow(AVOID_CACHE)) > 0;
             final boolean animatedStickerPack = cursor.getShort(cursor.getColumnIndexOrThrow(ANIMATED_STICKER_PACK)) > 0;
-            final StickerPack stickerPack = new StickerPack(identifier, name, publisher, trayImage, publisherEmail, publisherWebsite, privacyPolicyWebsite, licenseAgreementWebsite, imageDataVersion, avoidCache, animatedStickerPack);
+            final String telegramLink = cursor.getString(cursor.getColumnIndexOrThrow(TELEGRAM_LINK));
+            final String signalLink = cursor.getString(cursor.getColumnIndexOrThrow(SIGNAL_LINK));
+            final StickerPack stickerPack = new StickerPack(identifier, name, publisher, trayImage, publisherEmail, publisherWebsite, privacyPolicyWebsite, licenseAgreementWebsite, imageDataVersion, avoidCache, animatedStickerPack, telegramLink, signalLink);
             stickerPack.setAndroidPlayStoreLink(androidPlayStoreLink);
             stickerPack.setIosAppStoreLink(iosAppLink);
             stickerPackList.add(stickerPack);

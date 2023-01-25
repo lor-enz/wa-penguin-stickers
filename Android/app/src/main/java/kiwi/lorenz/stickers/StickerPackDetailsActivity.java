@@ -45,13 +45,16 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
     public static final String EXTRA_STICKER_PACK_TRAY_ICON = "sticker_pack_tray_icon";
     public static final String EXTRA_SHOW_UP_BUTTON = "show_up_button";
     public static final String EXTRA_STICKER_PACK_DATA = "sticker_pack";
-
+    public static final String EXTRA_STICKER_PACK_TELEGRAM_LINK = "sticker_pack_telegram_link";
+    public static final String EXTRA_STICKER_PACK_SIGNAL_LINK = "sticker_pack_signal_link";
 
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
     private StickerPreviewAdapter stickerPreviewAdapter;
     private int numColumns;
-    private View addButton;
+    private View addToWhatsappButton;
+    private View addToTelegramButton;
+    private View addToSignalButton;
     private View alreadyAddedText;
     private StickerPack stickerPack;
     private View divider;
@@ -70,7 +73,9 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
         TextView packSizeTextView = findViewById(R.id.pack_size);
         SimpleDraweeView expandedStickerView = findViewById(R.id.sticker_details_expanded_sticker);
 
-        addButton = findViewById(R.id.add_to_whatsapp_button);
+        addToWhatsappButton = findViewById(R.id.add_to_whatsapp_button);
+        addToTelegramButton = findViewById(R.id.add_to_telegram_button);
+        addToSignalButton = findViewById(R.id.add_to_signal_button);
         alreadyAddedText = findViewById(R.id.already_added_text);
         layoutManager = new GridLayoutManager(this, 1);
         recyclerView = findViewById(R.id.sticker_list);
@@ -86,7 +91,9 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
         packPublisherTextView.setText(stickerPack.publisher);
         packTrayIcon.setImageURI(StickerPackLoader.getStickerAssetUri(stickerPack.identifier, stickerPack.trayImageFile));
         packSizeTextView.setText(Formatter.formatShortFileSize(this, stickerPack.getTotalSize()));
-        addButton.setOnClickListener(v -> addStickerPackToWhatsApp(stickerPack.identifier, stickerPack.name));
+        addToWhatsappButton.setOnClickListener(v -> addStickerPackToWhatsApp(stickerPack.identifier, stickerPack.name));
+        addToTelegramButton.setOnClickListener(v -> addStickerPackToTelegram(stickerPack.telegramLink));
+        addToSignalButton.setOnClickListener(v -> addStickerPackToSignal(stickerPack.signalLink));
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(showUpButton);
             getSupportActionBar().setTitle(showUpButton ? getResources().getString(R.string.title_activity_sticker_pack_details_multiple_pack) : getResources().getQuantityString(R.plurals.title_activity_sticker_packs_list, 1));
@@ -94,7 +101,7 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
         findViewById(R.id.sticker_pack_animation_indicator).setVisibility(stickerPack.animatedStickerPack ? View.VISIBLE : View.GONE);
     }
 
-    private void launchInfoActivity(String publisherWebsite, String publisherEmail, String privacyPolicyWebsite, String licenseAgreementWebsite, String trayIconUriString) {
+    private void launchInfoActivity(String publisherWebsite, String publisherEmail, String privacyPolicyWebsite, String licenseAgreementWebsite, String trayIconUriString, String telegram_link, String signal_link) {
         Intent intent = new Intent(StickerPackDetailsActivity.this, StickerPackInfoActivity.class);
         intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_ID, stickerPack.identifier);
         intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_WEBSITE, publisherWebsite);
@@ -102,6 +109,9 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
         intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_PRIVACY_POLICY, privacyPolicyWebsite);
         intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_LICENSE_AGREEMENT, licenseAgreementWebsite);
         intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_TRAY_ICON, trayIconUriString);
+        // lorenz-edit
+        intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_TELEGRAM_LINK, telegram_link);
+        intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_SIGNAL_LINK, signal_link);
         startActivity(intent);
     }
 
@@ -115,7 +125,7 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_info && stickerPack != null) {
             Uri trayIconUri = StickerPackLoader.getStickerAssetUri(stickerPack.identifier, stickerPack.trayImageFile);
-            launchInfoActivity(stickerPack.publisherWebsite, stickerPack.publisherEmail, stickerPack.privacyPolicyWebsite, stickerPack.licenseAgreementWebsite, trayIconUri.toString());
+            launchInfoActivity(stickerPack.publisherWebsite, stickerPack.publisherEmail, stickerPack.privacyPolicyWebsite, stickerPack.licenseAgreementWebsite, trayIconUri.toString(), stickerPack.telegramLink, stickerPack.signalLink);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -177,13 +187,13 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
 
     private void updateAddUI(Boolean isWhitelisted) {
         if (isWhitelisted) {
-            addButton.setVisibility(View.GONE);
+            addToWhatsappButton.setVisibility(View.GONE);
             alreadyAddedText.setVisibility(View.VISIBLE);
-            findViewById(R.id.sticker_pack_details_tap_to_preview).setVisibility(View.GONE);
+
         } else {
-            addButton.setVisibility(View.VISIBLE);
-            alreadyAddedText.setVisibility(View.GONE);
-            findViewById(R.id.sticker_pack_details_tap_to_preview).setVisibility(View.VISIBLE);
+            addToWhatsappButton.setVisibility(View.VISIBLE);
+            alreadyAddedText.setVisibility(View.INVISIBLE);
+
         }
     }
 

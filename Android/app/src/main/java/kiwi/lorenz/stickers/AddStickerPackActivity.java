@@ -55,6 +55,24 @@ public abstract class AddStickerPackActivity extends BaseActivity {
 
     }
 
+    protected void addStickerPackToTelegram(String telegramLink) {
+        try {
+            AddStickerPackActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(telegramLink)));
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.telegram_error), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    protected void addStickerPackToSignal(String signalLink) {
+        try {
+            AddStickerPackActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(signalLink)));
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.signal_error), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
     private void launchIntentToAddPackToSpecificPackage(String identifier, String stickerPackName, String whatsappPackageName) {
         Intent intent = createIntentToAddStickerPack(identifier, stickerPackName);
         intent.setPackage(whatsappPackageName);
