@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".StickerApplication"
+        android:name="kiwi.lorenz.stickers.StickerApplication"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EntryActivity"
+        <activity android:name="kiwi.lorenz.stickers.EntryActivity"
             android:exported="true">
 
             <intent-filter>
@@ -20,27 +20,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StickerPackListActivity" />
+        <activity android:name="kiwi.lorenz.stickers.StickerPackListActivity" />
         <activity
-            android:name=".StickerPackDetailsActivity"
-            android:parentActivityName=".StickerPackListActivity"
+            android:name="kiwi.lorenz.stickers.StickerPackDetailsActivity"
+            android:parentActivityName="kiwi.lorenz.stickers.StickerPackListActivity"
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.samplestickerapp.StickerPackListActivity" />
+                android:value="kiwi.lorenz.stickers.StickerPackListActivity" />
         </activity>
         <activity
-            android:name=".StickerPackInfoActivity"
+            android:name="kiwi.lorenz.stickers.StickerPackInfoActivity"
             android:label="@string/title_activity_sticker_pack_info"
-            android:parentActivityName=".StickerPackDetailsActivity"
+            android:parentActivityName="kiwi.lorenz.stickers.StickerPackDetailsActivity"
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.samplestickerapp.StickerPackDetailsActivity" />
+                android:value="kiwi.lorenz.stickers.StickerPackDetailsActivity" />
         </activity>
 
         <provider
-            android:name=".StickerContentProvider"
+            android:name="kiwi.lorenz.stickers.StickerContentProvider"
             android:authorities="${contentProviderAuthority}"
             android:enabled="true"
             android:exported="true"

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package kiwi.lorenz.stickers;
 
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import kiwi.lorenz.stickers.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;

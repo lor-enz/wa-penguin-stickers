@@ -7,7 +7,7 @@ android {
     }
     compileSdkVersion 31
     defaultConfig {
-        applicationId "com.example.samplestickerapp"
+        applicationId "kiwi.lorenz.stickers"
         minSdkVersion 15
         targetSdkVersion 31
         versionCode 1
@@ -43,7 +43,7 @@ android {
         exclude 'lib/*/libnative-imagetranscoder.so'
         exclude 'lib/*/libnative-filters.so'
     }
-    namespace 'com.example.samplestickerapp'
+    namespace 'kiwi.lorenz.stickers'
 
     // Configures multiple APKs based on ABI.
     // see https://developer.android.com/studio/build/configure-apk-splits#configure-abi-split

@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package kiwi.lorenz.stickers;
 
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import kiwi.lorenz.stickers.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 class StickerPreviewViewHolder extends RecyclerView.ViewHolder {
