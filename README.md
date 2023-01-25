@@ -1,4 +1,16 @@
+# Changes to Android Version
+
+Brought the Android Version up to date to current Versions and Google Policies.
+
+Upgraded Android Gradle Plugin from 4.1.3 -> 7.4.0
+Changed compileSdkVersion from 30 -> 31
+Changed targetSdkVersion from 30 -> 31
+Added android:exported tag to EntryActivity in AndroidManifest.xml  
+
+
 # WhatsApp Stickers
+
+
 
 ![Works with Android](https://img.shields.io/badge/Works_with-Android-green?style=flat-square)
 ![Works with iOS](https://img.shields.io/badge/Works_with-iOS-blue?style=flat-square)
