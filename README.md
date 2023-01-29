@@ -41,4 +41,4 @@ The Software excluding the Sticker images is BSD licensed, as found in the LICEN
 The Sticker images follow a different license, as found in the LICENSE-images file 
 
 
-[play-store-link]: https://play.google.com/store/apps/details?id=net.lorenzburghardt.burgisbapperl&hl=en&gl=US
+[play-store-link]: https://play.google.com/store/apps/details?id=kiwi.lorenz.stickers
